@@ -11,5 +11,13 @@ rom_file_path = "ge007.u.z64"
 
 [patches]
 stubs = [
+    "resolve_TLBaddress_for_InvalidHit",
+    "initTLBPrepareContext"
+]
 
+ignored = [
+    "sizepropdef",
+    "texInflateLookup",
+    "boot",
+    "eqpower"
 ]

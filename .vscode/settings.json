@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "level_commands.h": "c",
+        "level_table.h": "c",
+        "level_defines.h": "c",
+        "object_constants.h": "c",
+        "stdarg.h": "c",
+        "object_fields.h": "c",
+        "patches.h": "c",
+        "types.h": "c",
+        "os_pi.h": "c"
+    }
+}

@@ -14,6 +14,51 @@
 #include "ultramodern/ultramodern.hpp"
 #include "ultramodern/config.hpp"
 
+extern "C" void osDpGetCounters_recomp(uint8_t* rdram, recomp_context* ctx) {
+    // Empty
+}
+
+extern "C" void osPiReadIo_recomp(uint8_t* rdram, recomp_context* ctx) {
+    // Empty
+}
+
+extern "C" void __f_to_ll_recomp(uint8_t* rdram, recomp_context* ctx) {
+    // needs implementation
+}
+
+extern "C" void __ll_to_d_recomp(uint8_t* rdram, recomp_context* ctx) {
+    // needs implementation
+}
+extern "C" void sizepropdef(uint8_t* rdram, recomp_context* ctx) {
+    // needs implementation
+}
+
+#if 0
+#define INIT_FUNC_ADDR 0x70000510
+
+extern "C" void recomp_entrypoint(uint8_t* rdram, recomp_context* ctx) {
+    // Variables corresponding to the assembly registers
+    uint32_t v0 = 1;  // $v0 = 1
+    uint32_t v1 = 0;  // $v1 = 0
+    uint32_t a0 = 0;  // $a0 = 0
+    uint32_t a1 = 0x70000000;  // $a1 = 0x7000 << 16
+    uint32_t a2 = 31; // $a2 = 31
+    uint32_t a3 = 1;  // $a3 = 1
+    uint32_t t0 = 0x007FE000; // $t0 = 0x007FE000
+
+    // Simulate the TLB setup (meaningless on PC, but kept for address consistency)
+    v1 = ((v1 >> 12) << 6) + a2;  // mimic EntryLo0 calculation
+    a0 = ((a0 >> 12) << 6) + a3;  // mimic EntryLo1 calculation
+    a0 = ((a1 >> 13) << 13);       // mimic EntryHi calculation
+
+    // "Jump" to the init function by calling it like in the assembly
+    void (*init)() = (void (*)())INIT_FUNC_ADDR;
+    // init();
+}
+#endif
+
+
+
 extern "C" void recomp_update_inputs(uint8_t* rdram, recomp_context* ctx) {
     recomp::poll_inputs();
 }

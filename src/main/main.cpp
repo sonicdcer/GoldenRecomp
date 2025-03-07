@@ -326,9 +326,9 @@ gpr get_entrypoint_address();
 // array of supported GameEntry objects
 std::vector<recomp::GameEntry> supported_games = {
     {
-        .rom_hash = 0x8a90daa33e09a265, // retail
-        .internal_name = "SUPERMARIO64",
-        .game_id = u8"sm64.us",
+        .rom_hash = 0x639ece0bc88c6e4a, // retail
+        .internal_name = "GOLDENEYE",
+        .game_id = u8"ge007.us",
         .save_type = recomp::SaveType::Eep4k,
         .is_enabled = true,
         .entrypoint_address = get_entrypoint_address(),

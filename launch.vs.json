@@ -5,8 +5,8 @@
     {
       "type": "default",
       "project": "CMakeLists.txt",
-      "projectTarget": "SuperMario64Recompiled.exe",
-      "name": "SuperMario64Recompiled.exe",
+      "projectTarget": "GoldenRecomp.exe",
+      "name": "GoldenRecomp.exe",
       "currentDir": "${workspaceRoot}"
     },
     {
@@ -15,7 +15,9 @@
       "projectTarget": "N64Recomp.exe",
       "name": "N64Recomp.exe",
       "currentDir": "${workspaceRoot}",
-      "args" : [ "patches.toml" ]
+      "args": [
+        "patches.toml"
+      ]
     }
   ]
 }

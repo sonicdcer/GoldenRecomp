@@ -1,5 +1,6 @@
 #include "patches.h"
 
+#if 0
 #include "misc_funcs.h"
 #include "libc/stdarg.h"
 
@@ -24,4 +25,4 @@ int recomp_printf(const char* fmt, ...) {
 
     return ret;
 }
-
+#endif

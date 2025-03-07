@@ -33,21 +33,21 @@
 
 
 
-#include "PR/ultratypes.h"
+// #include "PR/ultratypes.h"
 #include "rt64_extended_gbi.h"
-#include "PR/gbi.h"
-#include "PR/os_thread.h"
-#include "PR/os_message.h"
-#include "PR/os_pi.h"
+// #include "PR/gbi.h"
+// #include "PR/os_thread.h"
+// #include "PR/os_message.h"
+// #include "PR/os_pi.h"
 // #include "common_structs.h"
 // #include "structs.h"
 // #include "externs.h"
-#include "misc_funcs.h"
-#include "types.h"
-#include "object_constants.h"
-#include "object_fields.h"
-#include "structs.h"
-#include "externs.h"
+// #include "misc_funcs.h"
+// #include "types.h"
+// #include "object_constants.h"
+// #include "object_fields.h"
+// #include "structs.h"
+// #include "externs.h"
 // #include "defines.h"
 // #include "macros.h"
 // #include "course.h"
@@ -56,7 +56,7 @@
 // #include "render_objects.h"
 // #include "mk64_tagging.h"
 // #include "actor_types.h"
-#include "sounds.h"
+// #include "sounds.h"
 
 #define MAKE_RGB(r, g, b) (((r) << 0x10) | ((g) << 0x08) | (b << 0x00))
 
@@ -98,7 +98,7 @@
 #define gEXMatrixGroupDecomposedVertsOrderAuto(cmd, id, push, proj, edit) \
     gEXMatrixGroupDecomposed(cmd, id, push, proj, G_EX_COMPONENT_INTERPOLATE, G_EX_COMPONENT_INTERPOLATE, G_EX_COMPONENT_INTERPOLATE, G_EX_COMPONENT_INTERPOLATE, G_EX_COMPONENT_INTERPOLATE, G_EX_COMPONENT_INTERPOLATE, G_EX_COMPONENT_INTERPOLATE, G_EX_ORDER_AUTO, edit)
 
-
+#if 0
 int recomp_printf(const char* fmt, ...);
 float recomp_powf(float, float);
 f32 __sinf(f32);
@@ -121,5 +121,5 @@ void Game_InitFullViewport(void);
 
 float recomp_get_aspect_ratio(float);
 void recomp_crash(const char* err);
-
+#endif
 #endif

@@ -117,7 +117,7 @@ bool SetImageAsIcon(const char* filename, SDL_Window* window)
 SDL_Window* window; // RESOLUTION
 
 ultramodern::renderer::WindowHandle create_window(ultramodern::gfx_callbacks_t::gfx_data_t) {
-    window = SDL_CreateWindow("Super Mario 64: Recompiled", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 900, SDL_WINDOW_RESIZABLE );
+    window = SDL_CreateWindow("Goldeneye 007: Recompiled", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 900, SDL_WINDOW_RESIZABLE );
 #if defined(__linux__)
     SetImageAsIcon("icons/512.png",window);
     if (ultramodern::renderer::get_graphics_config().wm_option == ultramodern::renderer::WindowMode::Fullscreen) { // TODO: Remove once RT64 gets native fullscreen support on Linux
@@ -136,15 +136,17 @@ ultramodern::renderer::WindowHandle create_window(ultramodern::gfx_callbacks_t::
     SDL_GetWindowWMInfo(window, &wmInfo);
 
 #if defined(_WIN32)
-    return ultramodern::renderer::WindowHandle{ wmInfo.info.win.window, GetCurrentThreadId() };
+    // Store thread ID elsewhere if needed
+    return window;
 #elif defined(__ANDROID__)
     static_assert(false && "Unimplemented");
 #elif defined(__linux__)
     if (wmInfo.subsystem != SDL_SYSWM_X11) {
         exit_error("Unsupported SDL2 video driver \"%s\". Only X11 is supported on Linux.\n", SDL_GetCurrentVideoDriver());
     }
-
-    return ultramodern::renderer::WindowHandle{ wmInfo.info.x11.display, wmInfo.info.x11.window };
+    
+    // Store display info elsewhere if needed
+    return window;
 #else
     static_assert(false && "Unimplemented");
 #endif
@@ -320,19 +322,19 @@ RspUcodeFunc* get_rsp_microcode(const OSTask* task) {
     }
 }
 
-extern "C" void recomp_entrypoint(uint8_t * rdram, recomp_context * ctx);
+extern "C" void _start(uint8_t * rdram, recomp_context * ctx);
 gpr get_entrypoint_address();
 
 // array of supported GameEntry objects
 std::vector<recomp::GameEntry> supported_games = {
     {
-        .rom_hash = 0x639ece0bc88c6e4a, // retail
+        .rom_hash = 0x2d06800538d394c2, // retail
         .internal_name = "GOLDENEYE",
-        .game_id = u8"ge007.us",
+        .game_id = u8"ge007.tlbfree",
         .save_type = recomp::SaveType::Eep4k,
         .is_enabled = true,
-        .entrypoint_address = get_entrypoint_address(),
-        .entrypoint = recomp_entrypoint,
+        .entrypoint_address = 0x80000400,
+        .entrypoint = _start,
     },
 };
 

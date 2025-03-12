@@ -1,5 +1,11 @@
 #include <memory>
 #include <cstring>
+#include <SDL2/SDL_syswm.h>
+
+// Undefine problematic X11 macros before including RT64 headers
+#ifdef None
+#undef None
+#endif
 
 #define HLSL_CPU
 #include "hle/rt64_application.h"
@@ -183,8 +189,16 @@ zelda64::renderer::RT64Context::RT64Context(uint8_t* rdram, ultramodern::rendere
 #elif defined(__ANDROID__)
     assert(false && "Unimplemented");
 #elif defined(__linux__)
-    appCore.window.display = window_handle.display;
-    appCore.window.window = window_handle.window;
+    // On Linux, we need to get the native window handle from SDL
+    SDL_SysWMinfo wmInfo;
+    SDL_VERSION(&wmInfo.version);
+    if (SDL_GetWindowWMInfo(window_handle, &wmInfo)) {
+        appCore.window.display = wmInfo.info.x11.display;
+        appCore.window.window = wmInfo.info.x11.window;
+    } else {
+        fprintf(stderr, "Failed to get window info: %s\n", SDL_GetError());
+        assert(false);
+    }
 #elif defined(__APPLE__)
     appCore.window.window = window_handle.window;
     appCore.window.view = window_handle.view;

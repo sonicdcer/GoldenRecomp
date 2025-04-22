@@ -25,7 +25,8 @@ extern "C" void boot_osPiRawStartDma(uint8_t* rdram, recomp_context* ctx) {
 
     // Complete the DMA synchronously (the game immediately waits until it's done anyways)
     recomp::do_rom_read(rdram, rdram_address, device_address + recomp::rom_base, size);
-}```
+}
+```
 
 * Open project folder with visual studio
 * Select the GoldenRecomp.exe target

@@ -1,6 +1,10 @@
 #include <memory>
 #include <cstring>
-#include <SDL2/SDL_syswm.h>
+
+// Undefine problematic X11 macros before including RT64 headers
+#ifdef None
+#undef None
+#endif
 
 // Undefine problematic X11 macros before including RT64 headers
 #ifdef None

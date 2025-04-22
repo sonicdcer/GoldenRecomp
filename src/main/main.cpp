@@ -137,7 +137,8 @@ ultramodern::renderer::WindowHandle create_window(ultramodern::gfx_callbacks_t::
 
 #if defined(_WIN32)
     // Store thread ID elsewhere if needed
-    return window;
+    // return window;
+    return ultramodern::renderer::WindowHandle{ wmInfo.info.win.window, GetCurrentThreadId() };
 #elif defined(__ANDROID__)
     static_assert(false && "Unimplemented");
 #elif defined(__linux__)
@@ -322,19 +323,19 @@ RspUcodeFunc* get_rsp_microcode(const OSTask* task) {
     }
 }
 
-extern "C" void _start(uint8_t * rdram, recomp_context * ctx);
+extern "C" void recomp_entrypoint(uint8_t * rdram, recomp_context * ctx);
 gpr get_entrypoint_address();
 
 // array of supported GameEntry objects
 std::vector<recomp::GameEntry> supported_games = {
     {
-        .rom_hash = 0x2d06800538d394c2, // retail
+        .rom_hash = 0xb33d03a532ba225e, // retail
         .internal_name = "GOLDENEYE",
-        .game_id = u8"ge007.tlbfree",
+        .game_id = u8"ge007.us",
         .save_type = recomp::SaveType::Eep4k,
         .is_enabled = true,
-        .entrypoint_address = 0x80000400,
-        .entrypoint = _start,
+        .entrypoint_address = get_entrypoint_address(),
+        .entrypoint = recomp_entrypoint,
     },
 };
 

@@ -22,42 +22,29 @@ extern "C" void osPiReadIo_recomp(uint8_t* rdram, recomp_context* ctx) {
     // Empty
 }
 
+// TODO: Validate this
 extern "C" void __f_to_ll_recomp(uint8_t* rdram, recomp_context* ctx) {
-    // needs implementation
+    float input = ctx->f12.fl;
+
+    int64_t result = (int64_t) input;
+
+    ctx->r2 = (int32_t) (result >> 32); // Signed high part
+    ctx->r3 = (int32_t) (result >> 0);  // Low part as unsigned
 }
 
+// TODO: Validate this
 extern "C" void __ll_to_d_recomp(uint8_t* rdram, recomp_context* ctx) {
-    // needs implementation
+    // Properly sign-extend high and zero-extend low
+    int64_t input = ((int64_t) (ctx->r4) << 32) | (uint32_t) ctx->r5;
+
+    double result = (double) input;
+    ctx->f0.d = result;
+
+    // Also store raw double bits into r2/r3 if needed
+    uint64_t raw = ctx->f0.u64;
+    ctx->r2 = (int32_t) (raw >> 32);
+    ctx->r3 = (int32_t) (raw >> 0);
 }
-extern "C" void sizepropdef(uint8_t* rdram, recomp_context* ctx) {
-    // needs implementation
-}
-
-#if 0
-#define INIT_FUNC_ADDR 0x70000510
-
-extern "C" void recomp_entrypoint(uint8_t* rdram, recomp_context* ctx) {
-    // Variables corresponding to the assembly registers
-    uint32_t v0 = 1;  // $v0 = 1
-    uint32_t v1 = 0;  // $v1 = 0
-    uint32_t a0 = 0;  // $a0 = 0
-    uint32_t a1 = 0x70000000;  // $a1 = 0x7000 << 16
-    uint32_t a2 = 31; // $a2 = 31
-    uint32_t a3 = 1;  // $a3 = 1
-    uint32_t t0 = 0x007FE000; // $t0 = 0x007FE000
-
-    // Simulate the TLB setup (meaningless on PC, but kept for address consistency)
-    v1 = ((v1 >> 12) << 6) + a2;  // mimic EntryLo0 calculation
-    a0 = ((a0 >> 12) << 6) + a3;  // mimic EntryLo1 calculation
-    a0 = ((a1 >> 13) << 13);       // mimic EntryHi calculation
-
-    // "Jump" to the init function by calling it like in the assembly
-    void (*init)() = (void (*)())INIT_FUNC_ADDR;
-    // init();
-}
-#endif
-
-
 
 extern "C" void recomp_update_inputs(uint8_t* rdram, recomp_context* ctx) {
     recomp::poll_inputs();
@@ -96,22 +83,22 @@ extern "C" void osPfsInit_recomp(uint8_t* rdram, recomp_context* ctx) {
     ctx->r2 = 1; // PFS_ERR_NOPACK
 }
 
-extern "C" void __ll_lshift_recomp(uint8_t * rdram, recomp_context * ctx) {
+extern "C" void __ll_lshift_recomp(uint8_t* rdram, recomp_context* ctx) {
     int64_t a = (ctx->r4 << 32) | ((ctx->r5 << 0) & 0xFFFFFFFFu);
     int64_t b = (ctx->r6 << 32) | ((ctx->r7 << 0) & 0xFFFFFFFFu);
     int64_t ret = a << b;
 
-    ctx->r2 = (int32_t)(ret >> 32);
-    ctx->r3 = (int32_t)(ret >> 0);
+    ctx->r2 = (int32_t) (ret >> 32);
+    ctx->r3 = (int32_t) (ret >> 0);
 }
 
-extern "C" void __ll_rshift_recomp(uint8_t * rdram, recomp_context * ctx) {
+extern "C" void __ll_rshift_recomp(uint8_t* rdram, recomp_context* ctx) {
     int64_t a = (ctx->r4 << 32) | ((ctx->r5 << 0) & 0xFFFFFFFFu);
     int64_t b = (ctx->r6 << 32) | ((ctx->r7 << 0) & 0xFFFFFFFFu);
     int64_t ret = a >> b;
 
-    ctx->r2 = (int32_t)(ret >> 32);
-    ctx->r3 = (int32_t)(ret >> 0);
+    ctx->r2 = (int32_t) (ret >> 32);
+    ctx->r3 = (int32_t) (ret >> 0);
 }
 
 extern "C" void recomp_puts(uint8_t* rdram, recomp_context* ctx) {
@@ -119,7 +106,7 @@ extern "C" void recomp_puts(uint8_t* rdram, recomp_context* ctx) {
     u32 length = _arg<1, u32>(rdram, ctx);
 
     for (u32 i = 0; i < length; i++) {
-        fputc(MEM_B(i, (gpr)cur_str), stdout);
+        fputc(MEM_B(i, (gpr) cur_str), stdout);
     }
 }
 
@@ -192,14 +179,15 @@ extern "C" void recomp_get_low_health_beeps_enabled(uint8_t* rdram, recomp_conte
 }
 
 extern "C" void recomp_time_us(uint8_t* rdram, recomp_context* ctx) {
-    _return(ctx, static_cast<u32>(std::chrono::duration_cast<std::chrono::microseconds>(ultramodern::time_since_start()).count()));
+    _return(ctx, static_cast<u32>(
+                     std::chrono::duration_cast<std::chrono::microseconds>(ultramodern::time_since_start()).count()));
 }
 
 extern "C" void recomp_autosave_enabled(uint8_t* rdram, recomp_context* ctx) {
     _return(ctx, static_cast<s32>(zelda64::get_autosave_mode() == zelda64::AutosaveMode::On));
 }
 
-extern "C" void recomp_load_overlays(uint8_t * rdram, recomp_context * ctx) {
+extern "C" void recomp_load_overlays(uint8_t* rdram, recomp_context* ctx) {
     u32 rom = _arg<0, u32>(rdram, ctx);
     PTR(void) ram = _arg<1, PTR(void)>(rdram, ctx);
     u32 size = _arg<2, u32>(rdram, ctx);
@@ -207,7 +195,7 @@ extern "C" void recomp_load_overlays(uint8_t * rdram, recomp_context * ctx) {
     load_overlays(rom, ram, size);
 }
 
-extern "C" void recomp_high_precision_fb_enabled(uint8_t * rdram, recomp_context * ctx) {
+extern "C" void recomp_high_precision_fb_enabled(uint8_t* rdram, recomp_context* ctx) {
     _return(ctx, static_cast<s32>(zelda64::renderer::RT64HighPrecisionFBEnabled()));
 }
 
@@ -255,8 +243,7 @@ extern "C" void recomp_get_camera_inputs(uint8_t* rdram, recomp_context* ctx) {
     if (magnitude < radial_deadzone) {
         *x_out = 0.0f;
         *y_out = 0.0f;
-    }
-    else {
+    } else {
         float x_normalized = x / magnitude;
         float y_normalized = y / magnitude;
 

@@ -15,7 +15,7 @@
 #define osWritebackDCache osWritebackDCache_recomp
 #define osInvalICache osInvalICache_recomp
 #define osGetTime osGetTime_recomp
-
+#define osCreateThread osCreateThread_recomp
 #define osContStartReadData osContStartReadData_recomp
 #define osContGetReadData osContGetReadData_recomp
 #define osContStartQuery osContStartQuery_recomp

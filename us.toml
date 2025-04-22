@@ -1,19 +1,23 @@
 # Config file for Goldeneye 007 US Recompilation
 
 [input]
-entrypoint = 0x80000450
+entrypoint = 0x80000400
 # Paths are relative to the location of this config file.
 output_func_path = "RecompiledFuncs"
 #relocatable_sections_path = "overlays.us.txt"
 elf_path = "ge007.tlbfree.elf"
-#symbols_file_path = "GE007RecompSyms/ge.us.syms.toml"
+#symbols_file_path = "dump.toml"
 rom_file_path = "ge007.tlbfree.z64"
 
 [patches]
 stubs = [
-
 ]
 
 ignored = [
 
 ]
+
+# [[patches.instruction]]
+# func = "boot"
+# vram = 0x70000470
+# value = 0x00000000 # -> nop

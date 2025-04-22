@@ -323,7 +323,7 @@ RspUcodeFunc* get_rsp_microcode(const OSTask* task) {
     }
 }
 
-extern "C" void recomp_entrypoint(uint8_t * rdram, recomp_context * ctx);
+extern "C" void _start(uint8_t * rdram, recomp_context * ctx);
 gpr get_entrypoint_address();
 
 // array of supported GameEntry objects
@@ -331,11 +331,11 @@ std::vector<recomp::GameEntry> supported_games = {
     {
         .rom_hash = 0xb33d03a532ba225e, // retail
         .internal_name = "GOLDENEYE",
-        .game_id = u8"ge007.us",
+        .game_id = u8"ge007.tlbfree",
         .save_type = recomp::SaveType::Eep4k,
         .is_enabled = true,
-        .entrypoint_address = get_entrypoint_address(),
-        .entrypoint = recomp_entrypoint,
+        .entrypoint_address = 0x80000400,
+        .entrypoint = _start,
     },
 };
 

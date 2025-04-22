@@ -22,6 +22,10 @@ extern "C" void osPiReadIo_recomp(uint8_t* rdram, recomp_context* ctx) {
     // Empty
 }
 
+extern "C" void osPfsInit_recomp(uint8_t* rdram, recomp_context* ctx) {
+    // Empty
+}
+
 // TODO: Validate this
 extern "C" void __f_to_ll_recomp(uint8_t* rdram, recomp_context* ctx) {
     float input = ctx->f12.fl;
@@ -45,37 +49,8 @@ extern "C" void recomp_update_inputs(uint8_t* rdram, recomp_context* ctx) {
     recomp::poll_inputs();
 }
 
-// extern "C" void sqrtf_recomp(uint8_t* rdram, recomp_context* ctx) {
-//     ctx->f0.fl = sqrtf(ctx->f12.fl);
-// }
-
-extern "C" void osPfsIsPlug_recomp(uint8_t* rdram, recomp_context* ctx) {
-    ctx->r2 = 0;
-    MEM_B(0, ctx->r5) = 0;
-}
-
 extern "C" void rmonPrintf_recomp(uint8_t* rdram, recomp_context* ctx) {
     // Empty
-}
-
-extern "C" void string_to_u32_recomp(uint8_t* rdram, recomp_context* ctx) {
-    // Empty
-}
-
-extern "C" void send_recomp(uint8_t* rdram, recomp_context* ctx) {
-    // Empty
-}
-
-extern "C" void __osGetCause_recomp(uint8_t* rdram, recomp_context* ctx) {
-    // Empty
-}
-
-extern "C" void osMapTLB_recomp(uint8_t* rdram, recomp_context* ctx) {
-    // Empty
-}
-
-extern "C" void osPfsInit_recomp(uint8_t* rdram, recomp_context* ctx) {
-    ctx->r2 = 1; // PFS_ERR_NOPACK
 }
 
 extern "C" void __ll_lshift_recomp(uint8_t* rdram, recomp_context* ctx) {

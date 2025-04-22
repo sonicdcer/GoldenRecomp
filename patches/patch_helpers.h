@@ -1,7 +1,7 @@
 #ifndef __PATCH_HELPERS_H__
 #define __PATCH_HELPERS_H__
 
-#ifdef MIPS
+#if 1
 #include "ultra64.h"
 #else
 #include "librecomp/recomp.h"

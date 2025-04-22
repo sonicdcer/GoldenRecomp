@@ -16,3 +16,6 @@
 [submodule "lib/rt64"]
 	path = lib/rt64
 	url = https://github.com/rt64/rt64.git
+[submodule "lib/ge"]
+	path = lib/ge
+	url = https://github.com/kholdfuzion/goldeneye_src.git

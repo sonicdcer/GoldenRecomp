@@ -1,7 +1,7 @@
-text_offset = 0x3DA40
+text_offset = 0x22AF0
 text_size = 0xDC0
 text_address = 0x04001080
-rom_file_path = "baserom.u.z64"
+rom_file_path = "ge007.tlbfree.z64"
 output_file_path = "rsp/aspMain.cpp"
 output_function_name = "aspMain"
 

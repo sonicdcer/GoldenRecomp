@@ -27,7 +27,7 @@ extern "C" void boot_osPiRawStartDma(uint8_t* rdram, recomp_context* ctx) {
     recomp::do_rom_read(rdram, rdram_address, device_address + recomp::rom_base, size);
 }```
 
-* Ppen project folder with visual studio
+* Open project folder with visual studio
 * Select the GoldenRecomp.exe target
 * Set either x64-Debug or z64-ReleaseWithDebInfo as required
 * Build

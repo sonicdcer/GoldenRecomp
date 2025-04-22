@@ -71,3 +71,5 @@ __osGetCause_recomp = 0x8F0000EC;
 send_recomp = 0x8F0000F0;
 string_to_u32_recomp = 0x8F0000F4;
 yield_self_1ms = 0x8F0000F8;
+osCreateThread_recomp = 0x8F0000FC;
+boot_osPiRawStartDma = 0x8F000100;

@@ -117,7 +117,7 @@ bool SetImageAsIcon(const char* filename, SDL_Window* window)
 SDL_Window* window; // RESOLUTION
 
 ultramodern::renderer::WindowHandle create_window(ultramodern::gfx_callbacks_t::gfx_data_t) {
-    window = SDL_CreateWindow("Super Mario 64: Recompiled", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 900, SDL_WINDOW_RESIZABLE );
+    window = SDL_CreateWindow("Goldeneye 64: Recompiled", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 900, SDL_WINDOW_RESIZABLE );
 #if defined(__linux__)
     SetImageAsIcon("icons/512.png",window);
     if (ultramodern::renderer::get_graphics_config().wm_option == ultramodern::renderer::WindowMode::Fullscreen) { // TODO: Remove once RT64 gets native fullscreen support on Linux
@@ -326,7 +326,7 @@ gpr get_entrypoint_address();
 // array of supported GameEntry objects
 std::vector<recomp::GameEntry> supported_games = {
     {
-        .rom_hash = 0x639ece0bc88c6e4a, // retail
+        .rom_hash = 0xb33d03a532ba225e, // retail
         .internal_name = "GOLDENEYE",
         .game_id = u8"ge007.us",
         .save_type = recomp::SaveType::Eep4k,

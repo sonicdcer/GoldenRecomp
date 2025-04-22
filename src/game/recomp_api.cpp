@@ -39,11 +39,6 @@ extern "C" void __ll_to_d_recomp(uint8_t* rdram, recomp_context* ctx) {
 
     double result = (double) input;
     ctx->f0.d = result;
-
-    // Also store raw double bits into r2/r3 if needed
-    uint64_t raw = ctx->f0.u64;
-    ctx->r2 = (int32_t) (raw >> 32);
-    ctx->r3 = (int32_t) (raw >> 0);
 }
 
 extern "C" void recomp_update_inputs(uint8_t* rdram, recomp_context* ctx) {

@@ -11,6 +11,11 @@
 #undef None
 #endif
 
+// Undefine problematic X11 macros before including RT64 headers
+#ifdef None
+#undef None
+#endif
+
 #define HLSL_CPU
 #include "hle/rt64_application.h"
 #include "rt64_render_hooks.h"

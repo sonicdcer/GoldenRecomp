@@ -1,4 +1,4 @@
-text_offset = 0x22AF0
+text_offset = 0x22DA0
 text_size = 0xDC0
 text_address = 0x04001080
 rom_file_path = "ge007.tlbfree.z64"

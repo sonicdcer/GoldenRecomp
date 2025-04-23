@@ -23,8 +23,8 @@
 #define osPiStartDma osPiStartDma_recomp
 #define osStartThread osStartThread_recomp
 
-#define __sinf __sinf_recomp
-#define __cosf __cosf_recomp
+// #define __sinf __sinf_recomp
+// #define __cosf __cosf_recomp
 // #define sqrtf sqrtf_recomp
 #define bzero bzero_recomp
 #define gRandFloat sRandFloat
@@ -42,7 +42,7 @@
 // #include "common_structs.h"
 // #include "structs.h"
 // #include "externs.h"
-// #include "misc_funcs.h"
+#include "misc_funcs.h"
 // #include "types.h"
 // #include "object_constants.h"
 // #include "object_fields.h"

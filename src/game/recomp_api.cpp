@@ -13,6 +13,20 @@
 // #include "../patches/sound.h"
 #include "ultramodern/ultramodern.hpp"
 #include "ultramodern/config.hpp"
+#include "librecomp/game.hpp"
+#include "librecomp/addresses.hpp"
+
+extern "C" void boot_osPiRawStartDma(uint8_t* rdram, recomp_context* ctx) {
+    uint32_t direction = ctx->r4;
+    uint32_t device_address = ctx->r5;
+    gpr rdram_address = ctx->r6;
+    uint32_t size = ctx->r7;
+
+    assert(direction == 0); // Only reads
+
+    // Complete the DMA synchronously (the game immediately waits until it's done anyways)
+    recomp::do_rom_read(rdram, rdram_address, device_address + recomp::rom_base, size);
+}
 
 extern "C" void osDpGetCounters_recomp(uint8_t* rdram, recomp_context* ctx) {
     // Empty

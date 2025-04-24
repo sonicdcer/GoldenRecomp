@@ -1,10 +1,5 @@
 #include "patches.h"
 
-#include "PR/R4300.h"
-#include "PR/ultratypes.h"
-#include "PR/os.h"
-#include "misc_funcs.h"
-
 int dummy;
 int dummy3 = 0;
 

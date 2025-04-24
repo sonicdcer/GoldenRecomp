@@ -98,14 +98,8 @@
 #define gEXMatrixGroupDecomposedVertsOrderAuto(cmd, id, push, proj, edit) \
     gEXMatrixGroupDecomposed(cmd, id, push, proj, G_EX_COMPONENT_INTERPOLATE, G_EX_COMPONENT_INTERPOLATE, G_EX_COMPONENT_INTERPOLATE, G_EX_COMPONENT_INTERPOLATE, G_EX_COMPONENT_INTERPOLATE, G_EX_COMPONENT_INTERPOLATE, G_EX_COMPONENT_INTERPOLATE, G_EX_ORDER_AUTO, edit)
 
-#if 0
+
 int recomp_printf(const char* fmt, ...);
-float recomp_powf(float, float);
-f32 __sinf(f32);
-f32 __cosf(f32);
-float sqrtf(float f);
-void Game_InitFullViewport(void);
-// void* memcpy2(void* s1, const void* s2, size_t n);
 
 #define INCBIN(identifier, filename)          \
     asm(".pushsection .rodata\n"              \
@@ -121,5 +115,5 @@ void Game_InitFullViewport(void);
 
 float recomp_get_aspect_ratio(float);
 void recomp_crash(const char* err);
-#endif
+
 #endif

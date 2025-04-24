@@ -8,7 +8,10 @@ CFLAGS   := -target mips -mips2 -mabi=32 -O2 -G0 -mno-abicalls -mno-odd-spreg -m
 			-Wall -Wextra -Wno-incompatible-library-redeclaration -Wno-unused-parameter \
 			-Wno-unknown-pragmas -Wno-unused-variable -Wno-unused-but-set-variable -Wno-missing-braces \
 			-Wno-unsupported-floating-point-opt -Wno-switch -fno-strict-aliasing
-CPPFLAGS := -nostdinc -DVERSION_US -D__sgi -DTARGET_N64 -D_LANGUAGE_C -DMIPS -I dummy_headers -I ../lib/ge/include -I ../lib/ge/include/PR -I ../lib/ge/include/libc -I ../lib/rt64/include
+
+CPPFLAGS := -nostdinc -DVERSION_US -DTARGET_N64 -D_LANGUAGE_C -DMIPS \
+			-I ../lib/ge/include -I ../lib/ge/include/PR -I ../lib/ge/include/libc -I ../lib/rt64/include
+			
 LDFLAGS  := -nostdlib -T patches.ld -T syms.ld -Map patches.map --unresolved-symbols=ignore-all --emit-relocs
 
 C_SRCS := $(wildcard *.c)

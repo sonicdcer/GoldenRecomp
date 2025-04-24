@@ -18,20 +18,20 @@ namespace recomp {
     // First parameter is the enum name, second parameter is the bit field for the input (or 0 if there is no associated one), third is the readable name.
     // TODO refactor this to allow projects to rename these, or get rid of the readable name and leave that up to individual projects to map.
     #define DEFINE_N64_BUTTON_INPUTS() \
-        DEFINE_INPUT(A, 0x8000, "Jump") \
-        DEFINE_INPUT(B, 0x4000, "Action") \
-        DEFINE_INPUT(Z, 0x2000, "Crouch") \
-        DEFINE_INPUT(R, 0x0010, "Camera Mode") \
-        DEFINE_INPUT(START, 0x1000, "Pause") \
-        DEFINE_INPUT(C_UP, 0x0008, "Camera View") \
-        DEFINE_INPUT(C_LEFT, 0x0002, "Camera Left") \
-        DEFINE_INPUT(C_DOWN, 0x0004, "Camera Far") \
-        DEFINE_INPUT(C_RIGHT, 0x0001, "Camera Right") \
+        DEFINE_INPUT(A, 0x8000, "A") \
+        DEFINE_INPUT(B, 0x4000, "B") \
+        DEFINE_INPUT(Z, 0x2000, "Z") \
+        DEFINE_INPUT(R, 0x0010, "R") \
+        DEFINE_INPUT(START, 0x1000, "START") \
+        DEFINE_INPUT(C_UP, 0x0008, "C UP") \
+        DEFINE_INPUT(C_LEFT, 0x0002, "C LEFT") \
+        DEFINE_INPUT(C_DOWN, 0x0004, "C DOWN") \
+        DEFINE_INPUT(C_RIGHT, 0x0001, "C RIGHT") \
         DEFINE_INPUT(DPAD_UP, 0x0800, "Menu Up")  \
         DEFINE_INPUT(DPAD_RIGHT, 0x0100, "Menu Right")  \
         DEFINE_INPUT(DPAD_DOWN, 0x0400, "Menu Down")  \
-        DEFINE_INPUT(DPAD_LEFT, 0x0200, "Menu Left")
-        // DEFINE_INPUT(L, 0x0020, "Crosshair")
+        DEFINE_INPUT(DPAD_LEFT, 0x0200, "Menu Left")  \
+        DEFINE_INPUT(L, 0x0020, "L")
 
     #define DEFINE_N64_AXIS_INPUTS() \
         DEFINE_INPUT(Y_AXIS_POS, 0, "Up") \
@@ -124,7 +124,7 @@ namespace recomp {
         switch (input) {
             case GameInput::A: return defaults.a;
             case GameInput::B: return defaults.b;
-           //  case GameInput::L: return defaults.l;
+            case GameInput::L: return defaults.l;
             case GameInput::R: return defaults.r;
             case GameInput::Z: return defaults.z;
             case GameInput::START: return defaults.start;

@@ -275,7 +275,7 @@ void assign_all_mappings(recomp::InputDevice device, const recomp::DefaultN64Map
     assign_mapping_complete(device, recomp::GameInput::DPAD_DOWN, values.dpad_down);
     assign_mapping_complete(device, recomp::GameInput::DPAD_LEFT, values.dpad_left);
     assign_mapping_complete(device, recomp::GameInput::DPAD_RIGHT, values.dpad_right);
-    // assign_mapping_complete(device, recomp::GameInput::L, values.l);
+    assign_mapping_complete(device, recomp::GameInput::L, values.l);
     assign_mapping_complete(device, recomp::GameInput::R, values.r);
     assign_mapping_complete(device, recomp::GameInput::C_UP, values.c_up);
     assign_mapping_complete(device, recomp::GameInput::C_DOWN, values.c_down);

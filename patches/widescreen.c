@@ -59,50 +59,6 @@ RECOMP_PATCH void modelSetDistanceDisabled(s32 param_1) {
 }
 #endif
 
-#define VIEWPORT_HEIGHT_DEFAULT 240
-#define CINEMA_SCALE_FACTOR 84.0f
-#define VIEWPORT_OFFSET_HEIGHT_CINEMA 136
-#define WIDESCREEN_SCALE_FACTOR 40.0f
-#define VIEWPORT_OFFSET_HEIGHT_WIDESCREEN 240 /*180 */
-
-#define VIEWPORT_HEIGHT_FULLSCREEN 320 /* 304 ?? */
-#define VIEWPORT_HEIGHT_WIDESCREEN 248
-#define VIEWPORT_HEIGHT_CINEMA 190
-
-/* 109 = (440 / 4) - 1 */
-#define VIEWPORT_HEIGHT_4P_109 109
-#define VIEWPORT_HEIGHT_4P VIEWPORT_HEIGHT_4P_109
-
-#if 1
-RECOMP_PATCH s16 bondviewGetCurrentPlayerViewportHeight(void) {
-    f32 t;
-
-    if (getPlayerCount() >= 2) {
-        return VIEWPORT_HEIGHT_4P;
-    }
-
-    if (cameraBufferToggle != 0) {
-        // if (cur_player_get_screen_setting() == SCREEN_SIZE_WIDESCREEN) {
-        //     return VIEWPORT_HEIGHT_WIDESCREEN;
-        // } else if (cur_player_get_screen_setting() == SCREEN_SIZE_CINEMA) {
-        //     return VIEWPORT_HEIGHT_CINEMA;
-        // } else {
-        return VIEWPORT_HEIGHT_FULLSCREEN;
-        // }
-    }
-
-    // if (cur_player_get_screen_setting() == SCREEN_SIZE_WIDESCREEN) {
-    //     t = bondviewGetPauseAnimationPercent();
-    //     return (s16) ((s32) (WIDESCREEN_SCALE_FACTOR * t) + VIEWPORT_OFFSET_HEIGHT_WIDESCREEN);
-    // } else if (cur_player_get_screen_setting() == SCREEN_SIZE_CINEMA) {
-    //     t = bondviewGetPauseAnimationPercent();
-    //     return (s16) ((s32) (CINEMA_SCALE_FACTOR * t) + VIEWPORT_OFFSET_HEIGHT_CINEMA);
-    // } else {
-    return VIEWPORT_HEIGHT_DEFAULT;
-    // }
-}
-#endif
-
 #if 1
 RECOMP_PATCH Gfx* currentPlayerDrawFade(Gfx* gdl) {
     f32 frac = g_CurrentPlayer->colourscreenfrac;
@@ -116,7 +72,7 @@ RECOMP_PATCH Gfx* currentPlayerDrawFade(Gfx* gdl) {
         g = 0;
         r = 0;
     }
-    
+
     if (frac > 0) {
         gDPPipeSync(gdl++);
         gDPSetCycleType(gdl++, G_CYC_1CYCLE);
